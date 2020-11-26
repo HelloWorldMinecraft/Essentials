@@ -1,7 +1,6 @@
 package com.earth2me.essentials.register.payment.methods;
 
 import com.earth2me.essentials.register.payment.Method;
-import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -9,13 +8,12 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class VaultEco implements Method
 {
-	private Vault vault;
 	private Economy economy;
 
 	@Override
-	public Vault getPlugin()
+	public Plugin getPlugin()
 	{
-		return this.vault;
+		return org.bukkit.Bukkit.getPluginManager().getPlugin("Vault");
 	}
 
 	@Override
@@ -32,7 +30,7 @@ public class VaultEco implements Method
 	@Override
 	public String getName()
 	{
-		return this.vault.getDescription().getName();
+		return "Vault";
 	}
 	
 	public String getEconomy()
@@ -49,7 +47,7 @@ public class VaultEco implements Method
 	@Override
 	public String getVersion()
 	{
-		return this.vault.getDescription().getVersion();
+		return "1.7.2";
 	}
 
 	@Override
@@ -132,7 +130,7 @@ public class VaultEco implements Method
 		try
 		{
 			RegisteredServiceProvider<Economy> ecoPlugin = plugin.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
-			return plugin instanceof Vault && ecoPlugin != null && !ecoPlugin.getProvider().getName().equals("Essentials Economy");
+			return ecoPlugin != null && !ecoPlugin.getProvider().getName().equals("Essentials Economy");
 		}
 		catch (LinkageError e)
 		{
@@ -147,8 +145,7 @@ public class VaultEco implements Method
 	@Override
 	public void setPlugin(Plugin plugin)
 	{
-		this.vault = (Vault)plugin;
-		RegisteredServiceProvider<Economy> economyProvider = this.vault.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+		RegisteredServiceProvider<Economy> economyProvider = plugin.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
 		if (economyProvider != null)
 		{
 			this.economy = economyProvider.getProvider();

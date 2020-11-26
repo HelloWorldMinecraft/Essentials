@@ -204,7 +204,7 @@ public interface ISettings extends IConf
 
 	int getMaxNickLength();
 
-	int getMaxUserCacheCount();
+	long getMaxUserCacheCount();
 
 	boolean allowSilentJoinQuit();
 

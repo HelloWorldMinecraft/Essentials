@@ -2,6 +2,7 @@ package com.earth2me.essentials;
 
 import com.earth2me.essentials.utils.StringUtil;
 import com.google.common.cache.Cache;
+import com.google.common.cache.LoadingCache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.RemovalCause;
@@ -24,7 +25,7 @@ import org.bukkit.entity.Player;
 public class UserMap extends CacheLoader<String, User> implements IConf
 {
 	private final transient IEssentials ess;
-	private final transient Cache<String, User> users;
+	private final transient LoadingCache<String, User> users;
 	private final transient ConcurrentSkipListSet<UUID> keys = new ConcurrentSkipListSet<UUID>();
 	private final transient ConcurrentSkipListMap<String, UUID> names = new ConcurrentSkipListMap<String, UUID>();
 	private final transient ConcurrentSkipListMap<UUID, ArrayList<String>> history = new ConcurrentSkipListMap<UUID, ArrayList<String>>();
@@ -37,7 +38,7 @@ public class UserMap extends CacheLoader<String, User> implements IConf
 		uuidMap = new UUIDMap(ess);
 		//RemovalListener<UUID, User> remListener = new UserMapRemovalListener();
 		//users = CacheBuilder.newBuilder().maximumSize(ess.getSettings().getMaxUserCacheCount()).softValues().removalListener(remListener).build(this);
-		users = CacheBuilder.newBuilder().maximumSize(ess.getSettings().getMaxUserCacheCount()).softValues().build(this);
+		users = CacheBuilder.newBuilder().softValues().build(this);
 	}
 
 	private void loadAllUsersAsync(final IEssentials ess)

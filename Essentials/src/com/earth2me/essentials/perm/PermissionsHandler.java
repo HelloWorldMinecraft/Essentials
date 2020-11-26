@@ -167,17 +167,6 @@ public class PermissionsHandler implements IPermissionsHandler
 			return;
 		}
 
-		final Plugin bPermPlugin = pluginManager.getPlugin("bPermissions");
-		if (bPermPlugin != null && bPermPlugin.isEnabled())
-		{
-			if (!(handler instanceof BPermissions2Handler))
-			{
-				LOGGER.log(Level.INFO, "Essentials: Using bPermissions2 based permissions.");
-				handler = new BPermissions2Handler();
-			}
-			return;
-		}
-
 		final Plugin zPermsPlugin = pluginManager.getPlugin("zPermissions");
 		if (zPermsPlugin != null && zPermsPlugin.isEnabled())
 		{

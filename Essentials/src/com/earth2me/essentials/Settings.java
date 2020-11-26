@@ -1229,7 +1229,7 @@ public class Settings implements net.ess3.api.ISettings
 
 	// #easteregg
 	@Override
-	public int getMaxUserCacheCount()
+	public long getMaxUserCacheCount()
 	{
 		long count = Runtime.getRuntime().maxMemory() / 1024 / 96;
 		return config.getInt("max-user-cache-count", (int)count);

@@ -39,13 +39,6 @@
 		<url>http://ci.ess3.net/</url>
 	</ciManagement>
 
-	<repositories>
-		<repository>
-			<id>ess-repo</id>
-			<url>http://repo.ess3.net/content/groups/public</url>
-		</repository>
-	</repositories>
-
 	<distributionManagement>
 		<snapshotRepository>
 			<id>essdev</id>
@@ -59,13 +52,14 @@
 
 	<modules>
 		<module>Essentials</module>
-		<module>EssentialsAntiBuild</module>
-		<module>EssentialsChat</module>
-		<module>EssentialsGeoIP</module>
-		<module>EssentialsProtect</module>
 		<module>EssentialsSpawn</module>
-		<module>EssentialsXMPP</module>
 	</modules>
+	<repositories>
+		<repository>
+			<id>jitpack</id>
+			<url>https://jitpack.io/</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -122,12 +116,6 @@
 						<systemPath>${java.home}/../lib/tools.jar</systemPath>
 					</dependency>
 				</dependencies>
-				<configuration>
-					<target name="buildgm">
-						<replace dir="EssentialsGroupManager/src" includes="plugin.yml" token="version: GMBuildVer" value="version: ${GMVer}"/>
-						<ant dir="EssentialsGroupManager" antfile="build.xml"/>
-					</target>
-				</configuration>
 				<inherited>false</inherited>
 			</plugin>
 			<plugin>
@@ -145,32 +133,7 @@
 						</artifactItem>
 						<artifactItem>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>EssentialsAntiBuild</artifactId>
-							<version>${project.version}</version>
-						</artifactItem>
-						<artifactItem>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>EssentialsChat</artifactId>
-							<version>${project.version}</version>
-						</artifactItem>
-						<artifactItem>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>EssentialsGeoIP</artifactId>
-							<version>${project.version}</version>
-						</artifactItem>
-						<artifactItem>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>EssentialsProtect</artifactId>
-							<version>${project.version}</version>
-						</artifactItem>
-						<artifactItem>
-							<groupId>${project.groupId}</groupId>
 							<artifactId>EssentialsSpawn</artifactId>
-							<version>${project.version}</version>
-						</artifactItem>
-						<artifactItem>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>EssentialsXMPP</artifactId>
 							<version>${project.version}</version>
 						</artifactItem>
 					</artifactItems>
@@ -200,12 +163,6 @@
 										<exclude>plugin.yml</exclude>
 									</excludes>
 									<filtering>true</filtering>
-								</resource>
-								<resource>
-									<directory>EssentialsGroupManager/dist</directory>
-									<includes>
-										<include>EssentialsGroupManager.jar</include>
-									</includes>
 								</resource>
 							</resources>
 						</configuration>
